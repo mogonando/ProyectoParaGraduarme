@@ -1,0 +1,8 @@
+FROM tensorflow/tensorflow
+
+WORKDIR /app
+RUN set -ex && \
+    pip install numpy pandas scipy pika 
+RUN pip install paho-mqtt
+RUN pip install scikit-learn
+CMD ["python", "proxy.py"]
