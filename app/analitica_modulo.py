@@ -24,7 +24,9 @@ class analitica():
 
     def update_data(self, msj):
         msj_vetor = msj.split(",")
-        new_data = {"fecha": msj_vetor[0], "sensor": msj_vetor[1], "valor": float(msj_vetor[2])}
+        now = datetime.now()
+        date_time = now.strftime('%d.%m.%Y %H:%M:%S')
+        new_data = {"fecha": data_time, "sensor": msj_vetor[0], "valor": float(msj_vetor[1])}
         self.df = self.df.append(new_data, ignore_index=True)
         self.analitica_descriptiva()
         self.analitica_predictiva()
@@ -34,9 +36,8 @@ class analitica():
         print(self.df)
 
     def analitica_descriptiva(self):
-        self.operaciones("temperatura")
-        self.operaciones("densidad")
-
+        self.operaciones("volumen")
+      
     def operaciones(self, sensor):
         df_filtrado = self.df[self.df["sensor"] == sensor]
         df_filtrado = df_filtrado["valor"]
@@ -48,8 +49,7 @@ class analitica():
         self.publicar("std-{}".format(sensor), str(df_filtrado.std(skipna = True)))
 
     def analitica_predictiva(self):
-        self.regresion("temperatura")
-        self.regresion("densidad")
+        self.regresion("volumen")
 
     def regresion(self, sensor):
         df_filtrado = self.df[self.df["sensor"] == sensor]
