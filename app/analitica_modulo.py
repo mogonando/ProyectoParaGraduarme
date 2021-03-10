@@ -26,7 +26,7 @@ class analitica():
         msj_vetor = msj.split(",")
         now = datetime.now()
         date_time = now.strftime('%d.%m.%Y %H:%M:%S')
-        new_data = {"fecha": data_time, "sensor": msj_vetor[0], "valor": float(msj_vetor[1])}
+        new_data = {"fecha": date_time, "sensor": msj_vetor[0], "valor": float(msj_vetor[1])}
         self.df = self.df.append(new_data, ignore_index=True)
         self.analitica_descriptiva()
         self.analitica_predictiva()
