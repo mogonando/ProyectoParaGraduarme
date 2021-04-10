@@ -9,6 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile.node
     volumes:
+    -Data:/data
      - ./app:/app
     ports:
       - "1880:1880"
@@ -38,7 +39,9 @@ services:
       default:
         aliases:
           - rabbit
-
+volumes: 
+  app:
+  Data:
 networks:
   default:
     ipam:
